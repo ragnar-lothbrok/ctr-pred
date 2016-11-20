@@ -9,8 +9,8 @@ import plotly.plotly as py
 matplotlib.use('TkAgg') 
 plt.style.use('ggplot')
 
-df = pd.read_csv("/home/raghunandangupta/gitPro/DAT210x/Module2/Datasets/census.data",sep=',', 
-                  names = ['sNo','education', 'age', 'capital-gain', 'race', 'capital-loss', 'hours-per-week', 'sex', 'classification']);
+df = pd.read_csv("/home/raghunandangupta/Downloads/Train_UWu5bXk.csv",sep=',', 
+                  names = ['Item_Identifier','Item_Weight','Item_Fat_Content','Item_Visibility','Item_Type','Item_MRP','Outlet_Identifier','Outlet_Establishment_Year','Outlet_Size','Outlet_Location_Type','Outlet_Type','Item_Outlet_Sales']);
 
 # df = pd.read_csv("/home/raghunandangupta/gitPro/DAT210x/Module2/Datasets/servo.data",sep=',', 
 #                   names = ['motor', 'screw', 'pgain', 'vgain', 'class']);
