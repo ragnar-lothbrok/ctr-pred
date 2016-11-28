@@ -2,12 +2,12 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn import metrics
 import sklearn.datasets
 
-data, outcome = sklearn.datasets.load_svmlight_file('/home/raghunandangupta/Desktop/books/train_file_new', multilabel=True, zero_based=False)
+trainData, trainY = sklearn.datasets.load_svmlight_file('/home/raghunandangupta/Desktop/books/train_file_new', multilabel=True, zero_based=False)
 model = KNeighborsClassifier()
-expected = [i[0] for i in outcome]
-model.fit(data.toarray(), expected)
+trainModX = [i[0] for i in trainY]
+model.fit(trainData.toarray(), trainModX)
 # make predictions
-predicted = model.predict(data.toarray())
+predicted = model.predict(trainData.toarray())
 # summarize the fit of the model
-print(metrics.classification_report(expected, predicted))
-print(metrics.confusion_matrix(expected, predicted))
+print(metrics.classification_report(trainModX, predicted))
+print(metrics.confusion_matrix(trainModX, predicted))
