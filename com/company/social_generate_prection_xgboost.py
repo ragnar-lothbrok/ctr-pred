@@ -1,7 +1,5 @@
-import numpy as np
+#https://www.hackerearth.com/brainwaves/manage-team/
 import xgboost as xgb
-from sklearn import metrics
-import scipy
 
 weight = 4
 dtrain = xgb.DMatrix('/home/raghunandangupta/Downloads/soc_gen_data/abc.txt')
@@ -36,13 +34,3 @@ print test_preds
 test_preds_round = [1 if elem > 0.5 else -1 for elem in test_preds]
 for cluster in test_preds_round:
     print cluster
-
-# test_preds_round = [1 if elem > 0.5 else 0 for elem in test_preds]
-# 
-# print metrics.confusion_matrix(test_label, test_preds_round)
-# print ('Test error of ypred1=%f' % (np.sum((test_preds > 0.5) != test_label) / float(len(test_label))))
-# 
-# train_label = dtrain.get_label()
-# train_preds = bst.predict(dtrain)
-# 
-# print ('Train error of ypred1=%f' % (np.sum((train_preds > 0.5) != train_label) / float(len(train_label))))
