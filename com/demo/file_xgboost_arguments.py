@@ -68,8 +68,8 @@ if sys.argv[1:].__len__() == 5 :
         target.write("\t1\t"+str(mat[1][0]) +"\t"+str(mat[1][1])+"\n")
         target.write ('Test error of ypred1 = \t' + str((np.sum((test_preds > 0.5) != test_label) / float(len(test_label))))+"\n")
         target.write( "AUC Score (Test) = \t"+ str(metrics.roc_auc_score(test_label, test_preds))+"\n")
-        target.write( "Precision : "+ str(metrics.precision_score(test_label, test_preds_round))+"\n")
-        target.write( "Recall :"+ str(metrics.recall_score(test_label, test_preds_round))+"\n")
+        target.write( "Recall : "+ str(metrics.precision_score(test_label, test_preds_round))+"\n")
+        target.write( "Precision :"+ str(metrics.recall_score(test_label, test_preds_round))+"\n")
         train_label = dtrain.get_label()
         train_preds = bst.predict(dtrain)
         train_preds_round = [1 if elem > 0.5 else 0 for elem in train_preds]
