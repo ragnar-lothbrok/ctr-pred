@@ -11,28 +11,6 @@ testData, testY = sklearn.datasets.load_svmlight_file('/home/raghunandangupta/De
 trainModY = [i[0] for i in trainY]
 testModY = [i[0] for i in testY]
 
-oneCount = 0
-zeroCount = 0
-for value in trainModY:
-    if value == 0:
-        zeroCount = zeroCount + 1
-    else:
-        oneCount = oneCount + 1
-
-scalePosWeightMin = 0
-scalePosWeightMax = 0
-if (zeroCount / oneCount) > 0 :
-    scalePosWeightMax = (zeroCount / oneCount) + 5
-else:
-    if (zeroCount / oneCount) - 5 < 0:
-        scalePosWeightMin = 0
-    else:
-        scalePosWeightMin = (zeroCount / oneCount) - 5
-
-
-print scalePosWeightMin
-print scalePosWeightMax
-
 model = GaussianNB()
 
 k_fold = KFold(trainData.shape[0], n_folds=10, shuffle=True, random_state=0)

@@ -2,6 +2,8 @@ import sys
 import time
 import matplotlib
 from sklearn import metrics
+import operator
+import pandas
 matplotlib.use('Agg')
 import numpy as np
 import xgboost as xgb
@@ -9,6 +11,7 @@ import sklearn.datasets
 from sklearn.linear_model import BayesianRidge
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import GaussianNB
+from matplotlib import pylab as plt
 
 print "Number of arguments : "+ str(sys.argv[1:].__len__())
 for index in range(sys.argv[1:].__len__()):
@@ -21,6 +24,16 @@ if sys.argv[1:].__len__() == 5 :
     xgb.rabit.init()
     dtrain = xgb.DMatrix(sys.argv[1:][0])
     dtest = xgb.DMatrix(sys.argv[1:][1])
+    
+    #Writing all features in file
+    featureNamesFile = sys.argv[1:][3]+'/xgb.fmap'
+    outfile = open(featureNamesFile, 'w')
+    i = 0
+    for featur in dtrain.feature_names:
+        outfile.write('{0}\t{1}\tq\n'.format(i, featur))
+        i = i + 1
+    
+    outfile.close()
     
     trainData, trainY = sklearn.datasets.load_svmlight_file(sys.argv[1:][0], multilabel=True, zero_based=False)
     testData, testY = sklearn.datasets.load_svmlight_file(sys.argv[1:][1], multilabel=True, zero_based=False)
@@ -92,21 +105,22 @@ if sys.argv[1:].__len__() == 5 :
     sbuffer += "\n==============================================\n"
     print sbuffer
     target.write(sbuffer)
-    min_child_weight = 0
-    while  min_child_weight <= 10:
-        eta = 0.1
-        while eta <= 1:
-            depth = 5
-            while depth <= 5:
-                subSample = 0.1
+    min_child_weight = 1
+    while  min_child_weight <= 1:
+        eta = 0.01
+        while eta <= 0.3:
+            depth = 6
+            while depth <= 10:
+                subSample = 0.5
                 while subSample <= 1:
                     scalePosWeight = scalePosWeightMin
                     while scalePosWeight <= scalePosWeightMax:
                         sbuffer = ""
                         print "scalePosWeight => "+str(scalePosWeight)+" eta => "+str(eta)+" depth =>"+str(depth)+" subSample =>"+str(subSample)+" min_child_weight =>"+str(min_child_weight)
                         modelTime = long(time.time())
-                        modelFileName =  sys.argv[1:][3]+"model-"+str(modelTime)
+                        modelFileName =     sys.argv[1:][3]+"model-"+str(modelTime)
                         rawModelFileName =  sys.argv[1:][4]+"raw-model-"+str(modelTime)
+                        imageFileName =     sys.argv[1:][4]+""+str(modelTime)+"-feature_importance_xgb.png"
                         param = {'max_depth': depth, 'eta': eta, 'silent': 1, 'objective': 'binary:logistic', 'subsample': subSample,
                                  'colsample_bytree': 0.8, 'alpha': 0.001, 'min_child_weight': min_child_weight, 'nthread': 16, 'scale_pos_weight':scalePosWeight}
                         num_round = 600
@@ -159,14 +173,24 @@ if sys.argv[1:].__len__() == 5 :
                         scalePosWeight = scalePosWeight + 1
                         target.writelines(sbuffer)
                         print sbuffer
-#                         if precision > 0.7 or recall > 0.7:
-#                             scalePosWeight = scalePosWeight + 1
-#                             target.writelines(sbuffer)
-#                         else:
-#                             scalePosWeight = scalePosWeight + 3
+                        
+                        #plot feature importance graph
+                        importance = bst.get_fscore(fmap=featureNamesFile)
+                        print importance
+                        importance = sorted(importance.items(), key=operator.itemgetter(1))
+                        
+                        df = pandas.DataFrame(importance, columns=['feature', 'fscore'])
+                        df['fscore'] = df['fscore'] / df['fscore'].sum()
+                        
+                        plt.figure()
+                        df.plot()
+                        df.plot(kind='barh', x='feature', y='fscore', legend=False, figsize=(15, 14))
+                        plt.title('XGBoost Feature Importance')
+                        plt.xlabel('relative importance')
+                        plt.gcf().savefig(imageFileName)
                     subSample = subSample + 0.1
                 depth = depth + 1
-            eta = eta + 0.1
+            eta = eta + 0.05
         min_child_weight = min_child_weight + 1
     xgb.rabit.finalize()
     target.close()
