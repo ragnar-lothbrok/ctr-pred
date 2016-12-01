@@ -1,9 +1,12 @@
 import sys
 import time
 import matplotlib
+from xgboost import plot_tree
+matplotlib.use('Agg')
 from sklearn import metrics
 import operator
 import pandas
+from matplotlib import pyplot
 matplotlib.use('Agg')
 import numpy as np
 import xgboost as xgb
@@ -21,7 +24,7 @@ for index in range(sys.argv[1:].__len__()):
 currTime = long(time.time())
 sbuffer = ""
 modelIndex = 0
-if sys.argv[1:].__len__() == 6 :
+if sys.argv[1:].__len__() == 7 :
     target = open(sys.argv[1:][2] + "output-" + str(currTime), 'w')
     xgb.rabit.init()
     dtrain = xgb.DMatrix(sys.argv[1:][0])
@@ -126,6 +129,7 @@ if sys.argv[1:].__len__() == 6 :
                         modelFileName = sys.argv[1:][3] + "model-" + paramsValue + "-time-" + str(modelTime)
                         rawModelFileName = sys.argv[1:][4] + "raw-model-" + paramsValue + "-time-" + str(modelTime)
                         imageFileName = sys.argv[1:][5] + "feature_importance_xgb-" + paramsValue + "-time-" + str(modelTime) + ".png"
+                        treeFileName = sys.argv[1:][6] + "tree_xgb-" + paramsValue + "-time-" + str(modelTime) + ".png"
                         param = {'max_depth': depth, 'eta': eta, 'silent': 1, 'objective': 'binary:logistic', 'subsample': subSample,
                                  'colsample_bytree': 0.8, 'alpha': 0.001, 'min_child_weight': min_child_weight, 'nthread': 16, 'scale_pos_weight':scalePosWeight}
                         num_round = 600
@@ -196,6 +200,13 @@ if sys.argv[1:].__len__() == 6 :
                                 plt.title('XGBoost Feature Importance')
                                 plt.xlabel('relative importance')
                                 plt.gcf().savefig(imageFileName)
+                                
+                                #building Tree
+#                               bst = xgb.Booster(model_file='/home/raghunandangupta/Desktop/books/models/xgb.model')
+                                plot_tree(bst, num_trees=5)
+                                pyplot.savefig(treeFileName, format='png', dpi=2000)
+                                print "Tree exported :"+treeFileName
+                                target.write("Tree exported :"+treeFileName)
                             else:
                                 target.writelines("No importance found " + str(importance) + " Model Index " + str(modelIndex) + " File name : " + featureNamesFile)
                                 print "No importance found " + str(importance) + " Model Index " + str(modelIndex) + " File name : " + featureNamesFile
@@ -211,4 +222,4 @@ else :
     print "Please provide <trainFilePath> <testFilePath> <outputFilePath> <modelFilePath> <rawmodelPath> <imageModelPath>"
 
 
-# python  xgboost-including-plot.py /tmp/click_impression_20161115/lol/train_file_new /tmp/click_impression_20161115/lol/test_file_new /tmp/click_impression_20161115/output/ /tmp/click_impression_20161115/model/ /tmp/click_impression_20161115/rawmodel/ /tmp/click_impression_20161115/images/
+# python  xgboost-including-plot.py /tmp/click_impression_20161115/lol/train_file_new /tmp/click_impression_20161115/lol/test_file_new /tmp/click_impression_20161115/output/ /tmp/click_impression_20161115/model/ /tmp/click_impression_20161115/rawmodel/ /tmp/click_impression_20161115/images/ /tmp/click_impression_20161115/trees/
