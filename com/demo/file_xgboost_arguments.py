@@ -203,10 +203,13 @@ if sys.argv[1:].__len__() == 7 :
                                 
                                 #building Tree
 #                               bst = xgb.Booster(model_file='/home/raghunandangupta/Desktop/books/models/xgb.model')
-                                plot_tree(bst, num_trees=5)
-                                pyplot.savefig(treeFileName, format='png', dpi=2000)
-                                print "Tree exported :"+treeFileName
-                                target.write("Tree exported :"+treeFileName)
+                                try:
+                                    plot_tree(bst, num_trees=5)
+                                    pyplot.savefig(treeFileName, format='png', dpi=2000)
+                                    print "Tree exported :"+treeFileName
+                                    target.write("Tree exported :"+treeFileName)
+                                except:
+                                    print "Exception occured while creating tree"+treeFileName
                             else:
                                 target.writelines("No importance found " + str(importance) + " Model Index " + str(modelIndex) + " File name : " + featureNamesFile)
                                 print "No importance found " + str(importance) + " Model Index " + str(modelIndex) + " File name : " + featureNamesFile
