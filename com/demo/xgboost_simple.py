@@ -108,3 +108,9 @@ if importance.items().__len__() > 0 :
     plt.title('XGBoost Feature Importance')
     plt.xlabel('relative importance')
     plt.gcf().savefig('/home/raghunandangupta/Desktop/books/feature_importance_xgb.png')
+
+
+#shuf all_data -o all_data
+#split -l 3000000 all_data
+#mv xaa train_file_new
+#mv xab test_file_new
