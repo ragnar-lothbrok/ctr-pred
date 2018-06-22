@@ -1,0 +1,65 @@
+Year,Match date,Stage,Stadium,Home Team Name,Home Team Goals,Away Team Goals,Away Team Name,Group
+2018,14/06/2018 18:00,1,"Luzhniki Stadium, Moscow",Russia,5,0,Saudi Arabia,Group A
+2018,15/06/2018 15:00,1,Ekaterinburg Stadium,Egypt,0,1,Uruguay,Group A
+2018,15/06/2018 18:00,1,Saint Petersburg Stadium,Morocco,0,1,Iran,Group B
+2018,15/06/2018 21:00,1,"Fisht Stadium, Sochi",Portugal,3,3,Spain,Group B
+2018,16/06/2018 13:00,1,Kazan Arena,France,2,1,Australia,Group C
+2018,16/06/2018 16:00,1,"Otkrytiye Arena, Moscow",Argentina,1,1,Iceland,Group D
+2018,16/06/2018 19:00,1,Saransk Stadium,Peru,0,1,Denmark,Group C
+2018,16/06/2018 22:00,1,Kaliningrad Stadium,Croatia,2,0,Nigeria,Group D
+2018,17/06/2018 15:00,1,Samara Stadium,Costa Rica,0,1,Serbia,Group E
+2018,17/06/2018 18:00,1,"Luzhniki Stadium, Moscow",Germany,0,1,Mexico,Group F
+2018,17/06/2018 21:00,1,Rostov-on-Don Stadium,Brazil,1,1,Switzerland,Group E
+2018,18/06/2018 15:00,1,Nizhny Novgorod Stadium,Sweden,1,0,Korea Republic,Group F
+2018,18/06/2018 18:00,1,"Fisht Stadium, Sochi",Belgium,3,0,Panama,Group G
+2018,18/06/2018 21:00,1,Volgograd Stadium,Tunisia,1,2,England,Group G
+2018,19/06/2018 15:00,1,Saransk Stadium,Colombia,,,Japan,Group H
+2018,19/06/2018 18:00,1,"Otkrytiye Arena, Moscow",Poland,,,Senegal,Group H
+2018,19/06/2018 21:00,2,Saint Petersburg Stadium,Russia,,,Egypt,Group A
+2018,20/06/2018 15:00,2,"Luzhniki Stadium, Moscow",Portugal,,,Morocco,Group B
+2018,20/06/2018 18:00,2,Rostov-on-Don Stadium,Uruguay,,,Saudi Arabia,Group A
+2018,20/06/2018 21:00,2,Kazan Arena,Iran,,,Spain,Group B
+2018,21/06/2018 15:00,2,Samara Stadium,Denmark,,,Australia,Group C
+2018,21/06/2018 18:00,2,Ekaterinburg Stadium,France,,,Peru,Group C
+2018,21/06/2018 21:00,2,Nizhny Novgorod Stadium,Argentina,,,Croatia,Group D
+2018,22/06/2018 15:00,2,Saint Petersburg Stadium,Brazil,,,Costa Rica,Group E
+2018,22/06/2018 18:00,2,Volgograd Stadium,Nigeria,,,Iceland,Group D
+2018,22/06/2018 21:00,2,Kaliningrad Stadium,Serbia,,,Switzerland,Group E
+2018,23/06/2018 15:00,2,"Otkrytiye Arena, Moscow",Belgium,,,Tunisia,Group G
+2018,23/06/2018 18:00,2,Rostov-on-Don Stadium,Korea Republic,,,Mexico,Group F
+2018,23/06/2018 21:00,2,"Fisht Stadium, Sochi",Germany,,,Sweden,Group F
+2018,24/06/2018 15:00,2,Nizhny Novgorod Stadium,England,,,Panama,Group G
+2018,24/06/2018 18:00,2,Ekaterinburg Stadium,Japan,,,Senegal,Group H
+2018,24/06/2018 21:00,2,Kazan Arena,Poland,,,Colombia,Group H
+2018,25/06/2018 17:00,3,Samara Stadium,Uruguay,,,Russia,Group A
+2018,25/06/2018 17:00,3,Volgograd Stadium,Saudi Arabia,,,Egypt,Group A
+2018,25/06/2018 21:00,3,Saransk Stadium,Iran,,,Portugal,Group B
+2018,25/06/2018 21:00,3,Kaliningrad Stadium,Spain,,,Morocco,Group B
+2018,26/06/2018 17:00,3,"Luzhniki Stadium, Moscow",Denmark,,,France,Group C
+2018,26/06/2018 17:00,3,"Fisht Stadium, Sochi",Australia,,,Peru,Group C
+2018,26/06/2018 21:00,3,Saint Petersburg Stadium,Nigeria,,,Argentina,Group D
+2018,26/06/2018 21:00,3,Rostov-on-Don Stadium,Iceland,,,Croatia,Group D
+2018,27/06/2018 17:00,3,Ekaterinburg Stadium,Mexico,,,Sweden,Group F
+2018,27/06/2018 17:00,3,Kazan Arena,Korea Republic,,,Germany,Group F
+2018,27/06/2018 21:00,3,"Otkrytiye Arena, Moscow",Serbia,,,Brazil,Group E
+2018,27/06/2018 21:00,3,Nizhny Novgorod Stadium,Switzerland,,,Costa Rica,Group E
+2018,28/06/2018 17:00,3,Volgograd Stadium,Japan,,,Poland,Group H
+2018,28/06/2018 17:00,3,Samara Stadium,Senegal,,,Colombia,Group H
+2018,28/06/2018 21:00,3,Saransk Stadium,Panama,,,Tunisia,Group G
+2018,28/06/2018 21:00,3,Kaliningrad Stadium,England,,,Belgium,Group G
+2018,30/06/2018 17:00,Round of 16,Kazan Arena,Winner Group C,,,Runner-up Group D,
+2018,30/06/2018 21:00,Round of 16,"Fisht Stadium, Sochi",Winner Group A,,,Runner-up Group B,
+2018,01/07/2018 17:00,Round of 16,"Luzhniki Stadium, Moscow",Winner Group B,,,Runner-up Group A,
+2018,01/07/2018 21:00,Round of 16,Nizhny Novgorod Stadium,Winner Group D,,,Runner-up Group C,
+2018,02/07/2018 17:00,Round of 16,Samara Stadium,Winner Group E,,,Runner-up Group F,
+2018,02/07/2018 21:00,Round of 16,Rostov-on-Don Stadium,Winner Group G,,,Runner-up Group H,
+2018,03/07/2018 17:00,Round of 16,Saint Petersburg Stadium,Winner Group F,,,Runner-up Group E,
+2018,03/07/2018 21:00,Round of 16,"Otkrytiye Arena, Moscow",Winner Group H,,,Runner-up Group G,
+2018,06/07/2018 17:00,Quarter Finals,Nizhny Novgorod Stadium,To be announced,,,To be announced,
+2018,06/07/2018 21:00,Quarter Finals,Kazan Arena,To be announced,,,To be announced,
+2018,07/07/2018 17:00,Quarter Finals,Samara Stadium,To be announced,,,To be announced,
+2018,07/07/2018 21:00,Quarter Finals,"Fisht Stadium, Sochi",To be announced,,,To be announced,
+2018,10/07/2018 21:00,Semi Finals,Saint Petersburg Stadium,To be announced,,,To be announced,
+2018,11/07/2018 21:00,Semi Finals,"Luzhniki Stadium, Moscow",To be announced,,,To be announced,
+2018,14/07/2018 17:00,Finals,Saint Petersburg Stadium,To be announced,,,To be announced,
+2018,15/07/2018 18:00,Finals,"Luzhniki Stadium, Moscow",To be announced,,,To be announced,
