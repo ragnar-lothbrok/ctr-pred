@@ -23,7 +23,7 @@ writer = open(fileName, 'w')
 # myFields = ['status','bank_operation_code', 'beneficiary', 'day', 'month', 'year', 'intermediary', 'ordering_customer',
 #             'ordering_institution', 'receiver_correspondent', 'regulatory_reporting', 'remittance_information',
 #             'sender_correspondent', 'sender_to_receiver_information', 'transaction_reference']
-myFields = ['status','bank_operation_code', 'beneficiary', 'day', 'month', 'year',  'ordering_customer',
+myFields = ['status','bank_operation_code', 'beneficiary','month', 'year',  'ordering_customer',
             'ordering_institution']
 # writer = csv.DictWriter(myFile, fieldnames=myFields)
 record = "";
@@ -95,14 +95,14 @@ for line in file:
     if hasattr(mt103.text,'date'):
         if mt103.text.date is None:
             list.append("0")
-            list.append("0")
+            # list.append("0")
             list.append("0")
         else:
-            list.append(mt103.text.date.day)
+            # list.append(mt103.text.date.day)
             list.append(mt103.text.date.month)
             list.append(mt103.text.date.year)
     else:
-        list.append("0")
+        # list.append("0")
         list.append("0")
         list.append("0")
 
@@ -229,21 +229,21 @@ for line in file:
 
 
 
-amlpd=pd.read_csv(fileName,
-                  header=0, skiprows=0)
+# amlpd=pd.read_csv(fileName,
+#                   header=0, skiprows=0)
 
 # amlpd = amlpd.sample(frac=1)
 
-amlpd = sklearn.utils.shuffle(amlpd)
-
-amlpd= amlpd.head(1000)
+# amlpd = sklearn.utils.shuffle(amlpd)
+#
+# amlpd= amlpd.head(1000)
 
 # print(amlpd)
 
-graph1 = amlpd[['year','status']]
-
-amlpd.plot(style=".")
-plt.show()
-
-my_plot = graph1.plot(kind='bar')
-plt.show()
+# graph1 = amlpd[['year','status']]
+#
+# amlpd.plot(style=".")
+# plt.show()
+#
+# my_plot = graph1.plot(kind='bar')
+# plt.show()

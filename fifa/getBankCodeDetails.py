@@ -7,8 +7,12 @@ import matplotlib.pyplot as plt
 from sklearn.utils import shuffle
 import sklearn
 # import csv
+import io
 
-URL = "https://api.bank.codes/swift/json/9fc53b3db09ca830488d19546a4fc2a1/CITIUS33/"
+
+file = io.open("WatchListEntries.csv",'r',encoding='utf-16-le')
+for line in file:
+    print(line)
 
 writer = open('csvexample31.csv', 'w')
 # writer = open("csvexample31.csv", "w")
@@ -24,10 +28,10 @@ writer = open('csvexample31.csv', 'w')
 # myFields = ['status','bank_operation_code', 'beneficiary', 'day', 'month', 'year', 'intermediary', 'ordering_customer',
 #             'ordering_institution', 'receiver_correspondent', 'regulatory_reporting', 'remittance_information',
 #             'sender_correspondent', 'sender_to_receiver_information', 'transaction_reference']
-myFields = ['status','bank_operation_code', 'beneficiary', 'day', 'month', 'year',  'ordering_customer',
+myFields = ['status','bank_operation_code', 'beneficiary', 'month', 'year',  'ordering_customer',
             'ordering_institution']
 # writer = csv.DictWriter(myFile, fieldnames=myFields)
-record = "";
+record = ""
 for value in myFields:
     record = record + ","+str(value);
 # writer.writeheader()
@@ -95,17 +99,17 @@ for line in file:
 
     if hasattr(mt103.text,'date'):
         if mt103.text.date is None:
-            list.append("0")
+            # list.append("0")
             list.append("0")
             list.append("0")
         else:
-            list.append(mt103.text.date.day)
+            # list.append(mt103.text.date.day)
             list.append(mt103.text.date.month)
             list.append(mt103.text.date.year)
     else:
         list.append("0")
         list.append("0")
-        list.append("0")
+        # list.append("0")
 
 
     # list.append(mt103.text.details_of_charges)
@@ -230,21 +234,21 @@ for line in file:
 
 
 
-amlpd=pd.read_csv("csvexample3.csv",
-                  header=0, skiprows=0)
+# amlpd=pd.read_csv("csvexample3.csv",
+#                   header=0, skiprows=0)
 
 # amlpd = amlpd.sample(frac=1)
 
-amlpd = sklearn.utils.shuffle(amlpd)
-
-amlpd= amlpd.head(1000)
+# amlpd = sklearn.utils.shuffle(amlpd)
+#
+# amlpd= amlpd.head(1000)
 
 # print(amlpd)
 
-graph1 = amlpd[['year','status']]
-
-amlpd.plot(style=".")
-plt.show()
-
-my_plot = graph1.plot(kind='bar')
-plt.show()
+# graph1 = amlpd[['year','status']]
+#
+# amlpd.plot(style=".")
+# plt.show()
+#
+# my_plot = graph1.plot(kind='bar')
+# plt.show()
