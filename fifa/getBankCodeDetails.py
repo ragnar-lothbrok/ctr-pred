@@ -1,12 +1,17 @@
 import requests
 from mt103 import MT103
 import json
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.utils import shuffle
+import sklearn
 # import csv
 
 URL = "https://api.bank.codes/swift/json/9fc53b3db09ca830488d19546a4fc2a1/CITIUS33/"
 
-# myFile = open('csvexample3.csv', 'w')
-writer = open("csvexample3.csv", "w")
+writer = open('csvexample31.csv', 'w')
+# writer = open("csvexample31.csv", "w")
 # writer = csv.writer(myFile)
 # myFields = ['status','bank_operation_code', 'beneficiary', 'day', 'month', 'year', 'details_of_charges',
 #             'interbank_settled_amount', 'interbank_settled_currency', 'intermediary', 'ordering_customer',
@@ -28,10 +33,12 @@ for value in myFields:
 # writer.writeheader()
 writer.write(record[1:len(record)])
 writer.write("\n")
-file = open("/Users/coder/Downloads/TrainingData.csv", "r")
+file = open("/Users/coder/Downloads/TrainingData1.csv", "r")
 for line in file:
     print(line)
     data = line.split("|")
+    if len(line) < 10:
+        break
     if "score" in  data[1]:
         continue
     mt103 = MT103(data[3])
@@ -61,7 +68,14 @@ for line in file:
 
 
     list = []
-    list.append(data[0])
+    if data[0] == 'Blocked':
+        list.append(0)
+    elif data[0] == 'False Hit':
+        list.append(0.5)
+    else:
+        list.append(1)
+
+    # list.append(data[0])
     if hasattr(mt103.text,'bank_operation_code'):
         if mt103.text.bank_operation_code is None:
             list.append("NA")
@@ -81,15 +95,17 @@ for line in file:
 
     if hasattr(mt103.text,'date'):
         if mt103.text.date is None:
-            list.append("NA")
-            list.append("NA")
-            list.append("NA")
+            list.append("0")
+            list.append("0")
+            list.append("0")
         else:
             list.append(mt103.text.date.day)
             list.append(mt103.text.date.month)
             list.append(mt103.text.date.year)
     else:
-        list.append("NA")
+        list.append("0")
+        list.append("0")
+        list.append("0")
 
 
     # list.append(mt103.text.details_of_charges)
@@ -212,3 +228,23 @@ for line in file:
     writer.write(record[1:len(record)])
     writer.write("\n")
 
+
+
+amlpd=pd.read_csv("csvexample3.csv",
+                  header=0, skiprows=0)
+
+# amlpd = amlpd.sample(frac=1)
+
+amlpd = sklearn.utils.shuffle(amlpd)
+
+amlpd= amlpd.head(1000)
+
+# print(amlpd)
+
+graph1 = amlpd[['year','status']]
+
+amlpd.plot(style=".")
+plt.show()
+
+my_plot = graph1.plot(kind='bar')
+plt.show()
