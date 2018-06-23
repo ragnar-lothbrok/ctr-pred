@@ -8,7 +8,7 @@ from sklearn.utils import shuffle
 import sklearn
 # import csv
 
-fileName = "testing.csv"
+fileName = "validation.csv"
 writer = open(fileName, 'w')
 # writer = open("csvexample31.csv", "w")
 # writer = csv.writer(myFile)
@@ -32,7 +32,7 @@ for value in myFields:
 # writer.writeheader()
 writer.write(record[1:len(record)])
 writer.write("\n")
-file = open("/Users/coder/Downloads/TestingData.csv", "r")
+file = open("validation_set_random.csv", "r")
 # file = open("/Users/coder/Downloads/TestingData.csv", "r")
 for line in file:
     print(line)
@@ -41,7 +41,9 @@ for line in file:
         break
     if "score" in  data[1]:
         continue
-    mt103 = MT103(data[3])
+
+
+    mt103 = MT103(data[2])
     print("=============")
     print(mt103.text)
     print("======****=======")
@@ -68,14 +70,10 @@ for line in file:
 
 
     list = []
-    if data[0] == 'Blocked':
-        list.append(0)
-    elif data[0] == 'False Hit':
-        list.append(0.5)
-    else:
-        list.append(1)
+
 
     # list.append(data[0])
+    list.append("0")
     if hasattr(mt103.text,'bank_operation_code'):
         if mt103.text.bank_operation_code is None:
             list.append("NA")

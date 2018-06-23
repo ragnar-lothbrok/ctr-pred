@@ -9,12 +9,25 @@ import sklearn
 # import csv
 import io
 
+# https://github.com/danielquinn/mt103
+
+watchlist = []
 
 file = io.open("WatchListEntries.csv",'r',encoding='utf-16-le')
 for line in file:
-    print(line)
+    watchlist.append(line.lower())
 
-writer = open('csvexample31.csv', 'w')
+def findMatch(beneficiary, i):
+    benefSplit = beneficiary.lower().split(" ")
+    for data in watchlist:
+        for benef in benefSplit:
+            matchingOne = benef.replace(",", "").replace("X","").replace("/","");
+            if len(matchingOne) > 5 and matchingOne in data:
+                print(matchingOne)
+                i = i + 1
+    return i
+
+writer = open('csvexample32.csv', 'w')
 # writer = open("csvexample31.csv", "w")
 # writer = csv.writer(myFile)
 # myFields = ['status','bank_operation_code', 'beneficiary', 'day', 'month', 'year', 'details_of_charges',
@@ -28,7 +41,7 @@ writer = open('csvexample31.csv', 'w')
 # myFields = ['status','bank_operation_code', 'beneficiary', 'day', 'month', 'year', 'intermediary', 'ordering_customer',
 #             'ordering_institution', 'receiver_correspondent', 'regulatory_reporting', 'remittance_information',
 #             'sender_correspondent', 'sender_to_receiver_information', 'transaction_reference']
-myFields = ['status','bank_operation_code', 'beneficiary', 'month', 'year',  'ordering_customer',
+myFields = ['status','bank_operation_code', 'beneficiary', 'month',  'ordering_customer',
             'ordering_institution']
 # writer = csv.DictWriter(myFile, fieldnames=myFields)
 record = ""
@@ -37,9 +50,10 @@ for value in myFields:
 # writer.writeheader()
 writer.write(record[1:len(record)])
 writer.write("\n")
+i = 0
 file = open("/Users/coder/Downloads/TrainingData1.csv", "r")
 for line in file:
-    print(line)
+    # print(line)
     data = line.split("|")
     if len(line) < 10:
         break
@@ -93,22 +107,22 @@ for line in file:
             list.append("NA")
         else:
             list.append(mt103.text.beneficiary)
+
     else:
         list.append("NA")
-
 
     if hasattr(mt103.text,'date'):
         if mt103.text.date is None:
             # list.append("0")
             list.append("0")
-            list.append("0")
+            # list.append("0")
         else:
             # list.append(mt103.text.date.day)
             list.append(mt103.text.date.month)
-            list.append(mt103.text.date.year)
+            # list.append(mt103.text.date.year)
     else:
         list.append("0")
-        list.append("0")
+        # list.append("0")
         # list.append("0")
 
 
@@ -150,6 +164,7 @@ for line in file:
             list.append("NA")
         else:
             list.append(mt103.text.ordering_customer)
+            # findMatch(mt103.text.ordering_customer, i)
     else:
         list.append("NA")
 
@@ -231,11 +246,30 @@ for line in file:
 
     writer.write(record[1:len(record)])
     writer.write("\n")
+print("================*******")
+print(i)
 
 
 
-# amlpd=pd.read_csv("csvexample3.csv",
-#                   header=0, skiprows=0)
+amlpd=pd.read_csv("csvexample3.csv",
+                  header=0, skiprows=0)
+
+
+print(amlpd.status.value_counts())
+
+
+amlpd=pd.read_csv("testing.csv",
+                  header=0, skiprows=0)
+
+
+print(amlpd.status.value_counts())
+
+# rs = np.random.RandomState(0)
+# df = pd.DataFrame(rs.rand(10, 10))
+# corr = amlpd.corr()
+# corr.style.background_gradient()
+# corr.style.background_gradient().set_precision(2)
+# corr.style.background_gradient().set_properties(**{'font-size': '0pt'})
 
 # amlpd = amlpd.sample(frac=1)
 

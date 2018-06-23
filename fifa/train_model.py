@@ -20,16 +20,17 @@ def create_feature_map(features):
 	outfile.close()
 
 def convert(x):
-    if x > 0.7 :
-        return 2
-    elif x < .7 and x > 0.3:
-        return 1
+    if x > 0.85 :
+        return 'PASS'
+    elif x < .85 and x > 0.45:
+        return 'False Hit'
     else:
-        return 0
+        return 'Blocked'
 
 dtrain = xgb.DMatrix('csvexample3.csv?format=csv&label_column=0')
-dtest = xgb.DMatrix('testing.csv?format=csv&label_column=0')
-param = {'max_depth': 5, 'eta': 0.15, 'silent': 1, 'objective': 'reg:logistic', 'subsample': 0.8,
+# dtest = xgb.DMatrix('testing.csv?format=csv&label_column=0')
+dtest = xgb.DMatrix('validation.csv?format=csv&label_column=0')
+param = {'max_depth': 6, 'eta': 0.15, 'silent': 1, 'objective': 'reg:logistic', 'subsample': 0.8,
          'colsample_bytree': 0.8, 'alpha': 0.001, 'min_child_weight': 1, 'nthread': 8}
 num_round = 400
 
@@ -57,37 +58,34 @@ for elem in test_preds:
     print(elem)
 
 test_preds_round = [convert(i) for i in test_preds]
-test_label_new = [convert(i) for i in test_label]
 
-print(metrics.confusion_matrix(test_label_new, test_preds_round))
 
-xgb.plot_importance(bst)
+fileName = "predictions.csv"
+writer = open(fileName, 'w')
+for preds in test_preds_round:
+    writer.write(preds);
+    writer.write("\n");
 
-xgb.plot_tree(bst, num_trees=2)
-fig = matplotlib.pyplot.gcf()
-fig.set_size_inches(150, 100)
-fig.savefig('tree.png')
-
-importance = bst.get_fscore()
-if importance.items().__len__() > 0 :
-    importance = sorted(importance.items(), key=operator.itemgetter(1))
-    featureTuples = []
-    for typ in importance:
-        featureTuples.append((dictionary.get(typ[0]),typ[1]))
-    print(featureTuples)
-    df = pandas.DataFrame(featureTuples, columns=['feature', 'fscore'])
-    df['fscore'] = df['fscore'] / df['fscore'].sum()
-    plt.figure()
-    df.plot()
-    df.plot(kind='barh', x='feature', y='fscore', legend=False, figsize=(20, 14))
-    plt.title('XGBoost Feature Importance')
-    plt.xlabel('relative importance')
-    plt.gcf().savefig('test.png')
-    print('printed')
-
-print('Test error of ypred1=%f' % (np.sum((test_preds > 0.5) != test_label) / float(len(test_label))))
-
-train_label = dtrain.get_label()
-train_preds = bst.predict(dtrain)
-
-print('Train error of ypred1=%f' % (np.sum((train_preds > 0.5) != train_label) / float(len(train_label))))
+# xgb.plot_importance(bst)
+#
+# xgb.plot_tree(bst, num_trees=2)
+# fig = matplotlib.pyplot.gcf()
+# fig.set_size_inches(150, 100)
+# fig.savefig('tree.png')
+#
+# importance = bst.get_fscore()
+# if importance.items().__len__() > 0 :
+#     importance = sorted(importance.items(), key=operator.itemgetter(1))
+#     featureTuples = []
+#     for typ in importance:
+#         featureTuples.append((dictionary.get(typ[0]),typ[1]))
+#     print(featureTuples)
+#     df = pandas.DataFrame(featureTuples, columns=['feature', 'fscore'])
+#     df['fscore'] = df['fscore'] / df['fscore'].sum()
+#     plt.figure()
+#     df.plot()
+#     df.plot(kind='barh', x='feature', y='fscore', legend=False, figsize=(20, 14))
+#     plt.title('XGBoost Feature Importance')
+#     plt.xlabel('relative importance')
+#     plt.gcf().savefig('test.png')
+#     print('printed')
